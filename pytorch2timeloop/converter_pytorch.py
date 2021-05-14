@@ -109,6 +109,7 @@ def convert_model(model, input_size, batch_size, model_name, save_dir, convert_f
     layer_list = []
 
     for layer in layer_data:
+        
         if layer_data[layer]['mode'] == 'linear':
             W, H = 1, 1
             C, M = layer_data[layer]['in_channels'], layer_data[layer]['out_channels']
@@ -211,8 +212,8 @@ def extract_layer_data(model, input_size, convert_fc=False, exception_module_nam
         
         if isinstance(conv, nn.Conv2d):
         
-            data[layer_number]['in_channels'] = conv.in_channels
-            data[layer_number]['out_channels'] = conv.out_channels
+            data[layer_number]['in_channels'] = int(conv.in_channels)
+            data[layer_number]['out_channels'] = int(conv.out_channels)
             data[layer_number]['kernel_width'] = conv.kernel_size[0]
             data[layer_number]['kernel_height'] = conv.kernel_size[1]
             data[layer_number]['stride_width'] = conv.stride[0]
